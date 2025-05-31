@@ -78,14 +78,17 @@ def assign_tickets(inm_file, avail_file, team_file, output_file):
     print(f"✅ Tickets assigned and saved to {output_file}")
 
     # Create TEAM_Assigned_Email.csv
-    email_df = assigned_df.dropna(subset=['expert_assignee_name'])
+    # ✅ Step 1: Remove rows with NaN in 'expert_assignee_name'
+    cleaned_df = assigned_df.dropna(subset=['expert_assignee_name'])
 
-    columns_to_drop = ['priority', 'service_display_label', 'expert_assignee_name', 'creation_time']
-    email_df = email_df.drop(columns=[col for col in columns_to_drop if col in email_df.columns])
+    # ✅ Step 2: Drop unnecessary columns for the email report
+    columns_to_drop = ['service_display_label', 'expert_assignee_name', 'creation_time']
+    cleaned_df = cleaned_df.drop(columns=[col for col in columns_to_drop if col in cleaned_df.columns])
 
+    # ✅ Step 3: Save the final cleaned CSV
     email_path = os.path.join(DATA_DIR, "TEAM_Assigned_Email.csv")
-    email_df.to_csv(email_path, index=False)
-    print(f"📧 Email-ready CSV saved to TEAM_Assigned_Email.csv")
+    cleaned_df.to_csv(email_path, index=False)
+    print(f"📧 Final email-ready CSV saved to TEAM_Assigned_Email.csv")
 
 
 def generate_html_from_csv(csv_file='TEAM_Assigned_Email.csv', output_file='TEAM_Assigned.html'):

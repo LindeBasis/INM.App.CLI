@@ -1,65 +1,65 @@
-status,service_display_label,creation_time
-In progress,REW-DE_INTOUCH-ERP,4-16-25 1:44:17 PM
-In progress,RUI_SAP-S4-ERP,4-22-25 12:04:13 PM
-In progress,GBL_SAP-GRC,4-23-25 3:27:13 PM
-In progress,RUI_SAP-S4-ERP,5-13-25 2:29:05 PM
-Ready,GBL-IS_SCORCH,5-20-25 10:43:33 AM
-Ready,GBL_SAP-SRM,5-23-25 11:04:33 AM
-Ready,GBL-IS_SCORCH,5-23-25 10:31:20 PM
-Ready,GBL-IS_SCORCH,5-23-25 11:59:20 PM
-Ready,GBL-IS_SCORCH,5-24-25 1:00:16 AM
-Ready,GBL-IS_SCORCH,5-25-25 8:26:16 AM
-Accepted,TSI_SERVICE,5-25-25 1:16:17 PM
-Accepted,TSI_SERVICE,5-25-25 1:17:17 PM
-In progress,GBL-IS_SCORCH,5-26-25 3:02:29 AM
-In progress,TSI_SERVICE,5-26-25 10:46:21 AM
-Ready,GBL-IS_SCORCH,5-26-25 11:02:12 AM
-Ready,GBL-IS_SCORCH,5-26-25 11:52:21 AM
-Ready,TSI_SERVICE,5-26-25 1:00:52 PM
-Ready,TSI_SERVICE,5-26-25 1:46:12 PM
-In progress,TSI_SERVICE,5-26-25 4:15:42 PM
-In progress,TSI_SERVICE,5-26-25 10:30:44 PM
-Accepted,GBL-IS_SCORCH,5-27-25 2:04:29 AM
-Ready,GBL-IS_SCORCH,5-27-25 2:08:30 PM
-Ready,TSI_SERVICE,5-27-25 4:49:47 PM
-Accepted,TSI_SERVICE,5-27-25 4:47:47 PM
-Accepted,SAP ECC_BOCT_NA_O4E,5-27-25 7:01:21 PM
-Ready,TSI_SERVICE,5-27-25 7:15:48 PM
-Ready,GBL-IS_SCORCH,5-27-25 11:43:19 PM
-Accepted,GBL-IS_SAP-SECURITY-MONITORING,5-28-25 11:24:11 AM
-Accepted,SAP GTS_GBL_DGG,5-28-25 12:55:47 PM
-Ready,REW-DE_SAP-GTS,5-28-25 3:16:03 PM
-Ready,TSI_SERVICE,5-28-25 7:45:43 PM
-In progress,GBL-IS_SCORCH,5-29-25 12:26:30 AM
-Ready,GBL_LGS-FINANCE,5-29-25 12:56:56 PM
-Pending change,TSI_SERVICE,5-29-25 4:02:47 PM
-Pending change,TSI_SERVICE,5-29-25 4:03:17 PM
-Ready,TSI_SERVICE,5-29-25 4:04:47 PM
-Accepted,TSI_SERVICE,5-29-25 4:01:17 PM
-Accepted,TSI_SERVICE,5-29-25 4:02:17 PM
-Ready,TSI_SERVICE,5-29-25 4:16:47 PM
-Accepted,TSI_SERVICE,5-29-25 4:04:17 PM
-Accepted,TSI_SERVICE,5-29-25 4:05:17 PM
-In progress,TSI_SERVICE,5-29-25 4:16:17 PM
-In progress,TSI_SERVICE,5-29-25 4:15:47 PM
-Accepted,TSI_SERVICE,5-29-25 4:30:47 PM
-Accepted,TSI_SERVICE,5-29-25 4:32:47 PM
-Pending change,TSI_SERVICE,5-29-25 4:31:17 PM
-Pending change,TSI_SERVICE,5-29-25 4:32:18 PM
-Ready,TSI_SERVICE,5-29-25 4:34:17 PM
-Ready,TSI_SERVICE,5-29-25 4:34:47 PM
-In progress,TSI_SERVICE,5-29-25 4:33:47 PM
-Accepted,TSI_SERVICE,5-29-25 4:31:48 PM
-Pending change,TSI_SERVICE,5-29-25 4:37:07 PM
-Pending change,TSI_SERVICE,5-29-25 4:33:17 PM
-Pending change,TSI_SERVICE,5-29-25 4:35:47 PM
-Ready,TSI_SERVICE,5-29-25 4:35:17 PM
-Ready,GBL-IS_SCORCH,5-29-25 4:43:22 PM
-Ready,GBL-IS_SCORCH,5-29-25 4:48:24 PM
-Ready,GBL-IS_SCORCH,5-29-25 4:53:27 PM
-Accepted,GBL-IS_SCORCH,5-29-25 5:15:24 PM
-In progress,GBL-IS_SCORCH,5-29-25 6:38:31 PM
-Ready,GBL-IS_SCORCH,5-29-25 11:41:31 PM
-Ready,TSI_SERVICE,5-30-25 5:01:00 AM
-Ready,GBL-IS_SCORCH,5-30-25 7:14:27 AM
-Ready,GBL-IS_SCORCH,5-30-25 7:20:21 AM
+id,title,status,assigned_to
+1559545,Remove archiving roles for attached GPA100 users,In progress,Imran
+2225058,Index creation for RUI S4 systems as per SAP recommendation,In progress,Sudipta
+2427758,SSR: PEA SYSLOG error recorded,In progress,Santosh
+4563726,SAP TPO report recommendation,In progress,Abhijit
+5399876,Automated processing of 5264729 failed on 29492 for GAPIAMServerAdminPreProd,Ready,Alok
+5893514,RE: SAP SRM  - PACTUM Go live Cutover tasks,Ready,Sumit
+5976383,"MAI Alert: Red: P1A~ABAP, 'Enqueue Processing', 'Number of enqueue entries older than 2 day', '1 /D'",Ready,Deepjyoti
+5988430,"MAI Alert: Red: P4H, 'New OOM Trace Files', 'HOST=azhdp4h1001|KEY_FIGURE=1014', 'Avg: 1'",Ready,Rajiv
+5994820,"MAI Alert: Red: GRA00001, 'Oracle Backup', 'Last brbackup run', 'Run 23.05.2025 20:35:02 bfrdfggk.inr failed with rc = 0005'",Ready,Raj
+6030130,"MAI Alert: Red: CSP~UNSPAPP, 'SAP content server not available', 'SAP content server service check', '0'",Ready,Utsha 
+6033163,MONITORING/ALERT/MLGFRA10SA989 - MLGFRA10SA989 - Filesystem /mnt/provisioning is WARNING,Accepted,Pankaj
+6034193,MONITORING/ALERT/Linde - MLGFRA10SB235 - Filesystem /usr/sap/transQGE is WARNING,Accepted,SAMYUKTA
+6043081,"MAI Alert: Yellow: HQ1, 'Record Count of Column-Store Table Partitions', 'ALERT_TEXT=SAPSR3.CDPOS.0|KEY_FIGURE=027', '1599242872 OBJECTS'",In progress,Sajinur
+6062783,MONITORING/ALERT/Linde - MLGFRA10SB542 - Filesystem /oracle/D0A/sapdata1 is WARNING,In progress,Abhishek
+6064239,Problem: High CPU utilization (over 90% for more than 15m) on MLGMUC00APP996,Ready,Shaik
+6070035,"Problem: FS [/usr/sap/D4A]: Space is low (used > 85%, total 218.0GB) on MLGGAE00SA001",Ready,Preity
+6080830,MONITORING/ALERT/Linde - MLGFRA10SA574 - Systemd Service Summary is CRITICAL,Ready,Arpan
+6088470,SIUX/ Auditserver -  unknown service [vnc2] ,Ready,Sourav
+6108042,MONITORING/ALERT/Linde - MLGFRA10SA884 - Systemd Service Summary is CRITICAL,In progress,Sreejita
+6153306,MONITORING/ALERT/Linde - MLGFRA10SA581 - Filesystem /oracle/GRA/sapdata40 is WARNING,In progress,Nabojita
+6169420,"MAI Alert: Red: RBA~ABAP, 'Expiring ABAP certificates', 'MANAGED_OBJECT=RBA~ABAP~lincirba3700_RBA_37', 'Reference:0ALERT;VIRTUAL; # Items (NonCompliant/Compliant/NotFound/NotValuated/All): 2/ 42/ 0/ 0/ 44",Accepted,Shreyashee
+6224567,"MAI Alert: Red: P6E~ABAP, 'Diagnostic Agent for Technical System Monitoring unavailable', 'DIAGNOSTICAGENT=linapp6e4700', 'Agent is not available'",Ready,Adarsh 
+6247786,MONITORING/ALERT/Linde - MLGFRA10SB235 - Filesystem /usr/sap/NewHostAgent is WARNING,Ready,Dwaipayan
+6248000,MONITORING/ALERT/MLGFRA10SA985 - MLGFRA10SA985 - Filesystem /mnt/Softwares_2024 is WARNING,Accepted,Sudip
+6270165,Start SAP System O4E - Americas: AZURE - O4E ERP (SSO),Accepted,Imran
+6273026,MONITORING/ALERT/Linde - MLGFRA10SB207 - Systemd Service Summary is CRITICAL,Ready,Sudipta
+6313966,"MAI Alert: Red: HD4, 'Status of Most Recent Data Backup', 'Status of Most Recent Data Backup', 'Error: The last data backup failed. Without a recent data backup, your database cannot be recovered to its most recent state. Error mes'",Ready,Santosh
+6369428,SSR: PGG DDIC in batch jobs found as step user - MQG_3226,Accepted,Abhijit
+6385491,GTS issue after S4 go live,Accepted,Alok
+6411199,DGG100 and DGG120 job R_JR_BTCJOBS_GENERATOR failing - Logon of user DDIC in client <client> failed when starting a step,Ready,Sumit
+6464672,MONITORING/ALERT/Linde - MLGFRA10SB551 - Systemd Service Summary is CRITICAL,Ready,Deepjyoti
+6506949,"MAI Alert: Yellow: mlgfra10sb389, 'High Memory Usage', 'Free Swap [%]', '50 %'",In progress,Rajiv
+6569966,SAP GPA - company code HY10 access request - myID cart 134486,Ready,Raj
+6596066,MONITORING/ALERT/Linde - MLGFRA10SB235 - Filesystem /usr/sap/trans_ext is CRITICAL,Pending change,Utsha 
+6596074,MONITORING/ALERT/Linde - MLGFRA10SB539 - Filesystem /usr/sap/transS31 is CRITICAL,Pending change,Pankaj
+6596870,MONITORING/ALERT/Linde - MLGFRA10SB235 - Filesystem /usr/sap/transD6A is CRITICAL,Ready,Abhishek
+6596913,MONITORING/ALERT/Linde - MLGFRA10SB539 - Filesystem /usr/sap/transDGE is CRITICAL,Accepted,Shaik
+6596920,MONITORING/ALERT/Linde - MLGFRA10SB235 - Filesystem /usr/sap/transD9A is CRITICAL,Accepted,Preity
+6597276,MONITORING/ALERT/Linde - MLGFRA10SMB01 - NFS mount /opt/mon/FCI_pFaaS_zplindestorage_fs1 is CRITICAL,Ready,Arpan
+6597316,MONITORING/ALERT/Linde - MLGFRA10SB235 - Filesystem /usr/sap/transD8A is CRITICAL,Accepted,Sourav
+6597328,MONITORING/ALERT/Linde - MLGFRA10SB235 - Filesystem /usr/sap/transQGE is CRITICAL,Accepted,Sreejita
+6597568,MONITORING/ALERT/Linde - MLGFRA10SB563 - NFS mount /mnt/prov is CRITICAL,In progress,Nabojita
+6597863,MONITORING/ALERT/MLGFRA10SA989 - MLGFRA10SA989 - Filesystem /mnt/provisioning is CRITICAL,In progress,Shreyashee
+6599640,MONITORING/ALERT/Linde - MLGFRA10SB166 - NFS mount /tmp/mon/FCI_pFaaS_zplindestorage_fs1 is CRITICAL,Accepted,Adarsh 
+6599758,MONITORING/ALERT/Linde - MLGFRA10SB369 - NFS mount /usr/sap/interfaces/AX_INTEGRATION is CRITICAL,Accepted,Dwaipayan
+6600629,MONITORING/ALERT/MLGFRA10SA990 - MLGFRA10SA990 - Filesystem /mnt/provisioning is CRITICAL,Pending change,Sudip
+6600694,MONITORING/ALERT/Linde - MLGFRA10SB368 - NFS mount /usr/sap/interfaces/AX_INTEGRATION is CRITICAL,Pending change,Rajarshi
+6600732,MONITORING/ALERT/Linde - MLGFRA10SB557 - NFS mount /mnt/prov is CRITICAL,Ready,Imran
+6600735,MONITORING/ALERT/Linde - MLGFRA10SB549 - NFS mount /mnt/testdmg is CRITICAL,Ready,Sudipta
+6600842,MONITORING/ALERT/Linde - MLGFRA10SB538 - NFS mount /mnt/prov is CRITICAL,In progress,Santosh
+6601011,MONITORING/ALERT/Linde - MLGFRA10SB370 - NFS mount /usr/sap/interfaces/AX_INTEGRATION is CRITICAL,Accepted,Abhijit
+6601058,MONITORING/ALERT/Linde - MLGFRA10SB559 - NFS mount /mnt/prov is CRITICAL,Pending change,Alok
+6601291,MONITORING/ALERT/Linde - MLGFRA10SB558 - NFS mount /mnt/prov is CRITICAL,Pending change,Sumit
+6601332,MONITORING/ALERT/Linde - MLGFRA10SB126 - NFS mount /tmp/mon/FCI_pFaaS_zplindestorage_fs1 is CRITICAL,Pending change,Deepjyoti
+6601399,MONITORING/ALERT/Linde - MLGFRA10SB555 - NFS mount /mnt/prov is CRITICAL,Ready,Rajiv
+6601918,"MAI Alert: Red: D0A~ABAP~lincid0a2000_D0A_20, 'ABAP Instance not available', 'Instance Local Logon Test', 'RFC Ping failed'",Ready,Raj
+6602255,"MAI Alert: Red: D0A~ABAP, 'ABAP System not available', 'ABAP System Remote RFC Availability', 'Error when opening an RFC connection (CPIC-CALL: ThSAPOCMINIT, communication rc: CM_PRODUCT_SPECIFIC_ERROR (cmRc=20).'",Ready,Utsha 
+6603395,"MAI Alert: Red: D0A~ABAP~Central Service Instance, 'ABAP Central Service not available', 'ABAP Enqueue Server Status', 'Stopped'",Ready,Pankaj
+6605929,"MAI Alert: Yellow: S4100001, 'Oracle Backup', 'Last brarchive run', 'Run 29.05.2025 11:30:02 afrehhkc.svd terminated with warnings'",Accepted,SAMYUKTA
+6616927,"MAI Alert: Yellow: HD1, 'Licensed Memory Usage', 'Licensed Memory Usage', '90 %'",In progress,Sajinur
+6659531,"MAI Alert: Red: P1A~ABAP, 'Enqueue Processing', 'Number of enqueue entries older than 2 day', '5 /D'",Ready,Arpan
+6685322,MONITORING/ALERT/Linde - MLGFRA10SA579 - Filesystem /oracle/TSJ/oraarch is CRITICAL,Ready,Sourav
+6693071,"MAI Alert: Red: P9E~ABAP~linapp9e2700_P9E_27, 'High ABAP Memory Usage', 'Heap memory used (%)', '99 %'",Ready,Sreejita
+6693337,"MAI Alert: Red: MQQ~MDM~lingsmqq7200_MQQ_72, 'Master Data Server not available', 'Master Data Server Status', 'Cannot connect to service sapstartsrv'",Ready,Nabojita

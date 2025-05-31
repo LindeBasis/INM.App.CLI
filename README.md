@@ -16,7 +16,8 @@ TEAM_Assigned.csv
 
 ```bash
 # Install the CLI
-pip install .
+pip uninstall ticket_assigner
+pip install -e .
 
 # Normalize column names
 ticket-assigner normalize-inm
