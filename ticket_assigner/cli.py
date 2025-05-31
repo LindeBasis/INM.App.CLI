@@ -1,81 +1,127 @@
-# ticket_assigner/cli.py
+import os
+import sqlite3
+import pandas as pd
+import argparse
+from datetime import datetime
+
+DATA_DIR = "data"
+DB_PATH = os.path.join(DATA_DIR, "ticket_assign.db")
+
+
+def normalize_inm_csv(input_file, output_file='INM.normalized.csv'):
+    input_path = os.path.join(DATA_DIR, input_file)
+    output_path = os.path.join(DATA_DIR, output_file)
+
+    df = pd.read_csv(input_path)
+    df.columns = (
+        df.columns.str.strip()
+                  .str.lower()
+                  .str.replace(r'\s+', '_', regex=True)
+    )
+    df.to_csv(output_path, index=False)
+    print(f"✅ Normalized CSV written to {output_path}")
+
+
+def load_inm_csv_to_db(csv_file):
+    df = pd.read_csv(os.path.join(DATA_DIR, csv_file))
+    df.columns = df.columns.str.strip().str.lower().str.replace(r'\s+', '_', regex=True)
+
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS tickets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT,
+            ticket_data TEXT
+        )
+    """)
+    for _, row in df.iterrows():
+        cur.execute("INSERT INTO tickets (created_at, ticket_data) VALUES (?, ?)",
+                    (datetime.now().isoformat(), row.to_json()))
+    conn.commit()
+    conn.close()
+    print(f"✅ Loaded {len(df)} rows into DB")
+
+
+def assign_tickets(inm_file, avail_file, team_file, output_file):
+    inm_df = pd.read_csv(os.path.join(DATA_DIR, inm_file))
+    inm_df.columns = inm_df.columns.str.strip().str.lower().str.replace(r'\s+', '_', regex=True)
+
+    avail_df = pd.read_csv(os.path.join(DATA_DIR, avail_file))
+    avail_df.columns = avail_df.columns.str.strip().str.lower()
+
+    team_df = pd.read_csv(os.path.join(DATA_DIR, team_file))
+    team_df.columns = team_df.columns.str.strip().str.lower()
+
+    if 'status' not in avail_df.columns or 'name' not in avail_df.columns:
+        raise ValueError("TEAM_AVAIL.csv must contain 'Name' and 'Status' columns")
+
+    available = avail_df[~avail_df['status'].str.lower().eq('leave')]['name'].tolist()
+    if not available:
+        raise Exception("No team members available for assignment!")
+
+    assigned = []
+    member_index = 0
+    for _, ticket in inm_df.iterrows():
+        member = available[member_index % len(available)]
+        member_index += 1
+        assigned.append({
+            **ticket.to_dict(),
+            'assigned_to': member
+        })
+
+    assigned_df = pd.DataFrame(assigned)
+    assigned_df.to_csv(os.path.join(DATA_DIR, output_file), index=False)
+    print(f"✅ Tickets assigned and saved to {output_file}")
+
+
+def generate_html_from_csv(csv_file, output_file='TEAM_Assigned.html'):
+    df = pd.read_csv(os.path.join(DATA_DIR, csv_file))
+    html = df.to_html(index=False, border=1)
+
+    with open(os.path.join(DATA_DIR, output_file), 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"✅ HTML report saved to {output_file}")
+
 
 def cli():
-    import argparse
-    import pandas as pd
-    import sqlite3
-    from datetime import datetime
-    import itertools
-    import os
-
-    DB_PATH = 'ticket_assign.db'
-    DATA_DIR = 'data'
-
-    def load_inm_to_sqlite(inm_filename):
-        inm_path = os.path.join(DATA_DIR, inm_filename)
-        df_inm = pd.read_csv(inm_path)
-        df_inm['created_at'] = datetime.now().isoformat()
-        with sqlite3.connect(DB_PATH) as conn:
-            df_inm.to_sql('inm_tickets', conn, if_exists='append', index=False)
-        print(f"✅ Loaded {inm_filename} into SQLite.")
-
-    def assign_tickets(inm_file, avail_file, team_file, output_file):
-        inm_df = pd.read_csv(os.path.join(DATA_DIR, inm_file))
-        avail_df = pd.read_csv(os.path.join(DATA_DIR, avail_file))
-        master_df = pd.read_csv(os.path.join(DATA_DIR, team_file))
-
-        available = avail_df[~avail_df['Status'].str.lower().eq('leave')]
-        if available.empty:
-            raise Exception("❌ No team members available.")
-
-        team_ids = available['EmployeeID'].tolist()
-        rr_cycle = itertools.cycle(team_ids)
-
-        assigned_rows = []
-        for _, ticket in inm_df.iterrows():
-            assignee_id = next(rr_cycle)
-            assignee = master_df[master_df['EmployeeID'] == assignee_id].iloc[0]
-            assigned_rows.append({
-                **ticket.to_dict(),
-                'AssignedTo': assignee['Name'],
-                'Email': assignee['Email']
-            })
-
-        assigned_df = pd.DataFrame(assigned_rows)
-        assigned_df.to_csv(os.path.join(DATA_DIR, output_file), index=False)
-        print(f"✅ Tickets written to {output_file}")
-        return assigned_df
-
-    def assigned_to_html(input_file, output_html):
-        df = pd.read_csv(os.path.join(DATA_DIR, input_file))
-        html_content = df.to_html(index=False, border=1)
-        with open(os.path.join(DATA_DIR, output_html), 'w') as f:
-            f.write(f"<html><body><h2>Today's Ticket Assignments</h2>{html_content}</body></html>")
-        print(f"✅ HTML file created: {output_html}")
-
-    parser = argparse.ArgumentParser(description="Ticket Assignment CLI")
+    parser = argparse.ArgumentParser(description="Ticket Assigner CLI")
     subparsers = parser.add_subparsers(dest="command")
 
-    load_parser = subparsers.add_parser('load-inm')
-    load_parser.add_argument('--inm', required=True, help='INM CSV file in data/')
+    # normalize-inm
+    norm_parser = subparsers.add_parser("normalize-inm")
+    norm_parser.add_argument('--input', default='INM.csv')
+    norm_parser.add_argument('--output', default='INM.normalized.csv')
 
-    assign_parser = subparsers.add_parser('assign')
-    assign_parser.add_argument('--inm', required=True)
-    assign_parser.add_argument('--avail', required=True)
-    assign_parser.add_argument('--team', required=True)
+    # load-inm
+    load_parser = subparsers.add_parser("load-inm")
+    load_parser.add_argument('--inm', default='INM.normalized.csv')
+
+    # assign
+    assign_parser = subparsers.add_parser("assign")
+    assign_parser.add_argument('--inm', default='INM.normalized.csv')
+    assign_parser.add_argument('--avail', default='TEAM_AVAIL.csv')
+    assign_parser.add_argument('--team', default='TEAM_MASTER.csv')
     assign_parser.add_argument('--output', default='TEAM_Assigned.csv')
 
-    html_parser = subparsers.add_parser('html')
+    # html
+    html_parser = subparsers.add_parser("html")
     html_parser.add_argument('--input', default='TEAM_Assigned.csv')
     html_parser.add_argument('--output', default='TEAM_Assigned.html')
 
     args = parser.parse_args()
 
-    if args.command == 'load-inm':
-        load_inm_to_sqlite(args.inm)
-    elif args.command == 'assign':
+    if args.command == "normalize-inm":
+        normalize_inm_csv(args.input, args.output)
+    elif args.command == "load-inm":
+        load_inm_csv_to_db(args.inm)
+    elif args.command == "assign":
         assign_tickets(args.inm, args.avail, args.team, args.output)
-    elif args.command == 'html':
-        assigned_to_html(args.input, args.output)
+    elif args.command == "html":
+        generate_html_from_csv(args.input, args.output)
     else:
         parser.print_help()
+
+
+if __name__ == "__main__":
+    cli()
