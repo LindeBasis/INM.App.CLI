@@ -1,12 +1,12 @@
 #!/bin/bash
-# Step 1: Normalize INM.csv
-ticket-assigner normalize-inm --input INM.csv
+# Normalize column names
+ticket-assigner normalize-inm
 
-# Step 2: Load normalized version
+# Load data to DB
 ticket-assigner load-inm --inm INM.normalized.csv
 
-# Step 3: Assign tickets using normalized file
-ticket-assigner assign --inm INM.normalized.csv --avail TEAM_AVAIL.csv --team TEAM_MASTER.csv
+# Assign tickets and generate TEAM_Assigned.csv and TEAM_Assigned_Email.csv
+ticket-assigner assign
 
-# Step 4: Generate HTML
-ticket-assigner html --input TEAM_Assigned.csv
+# Convert TEAM_Assigned_Email.csv to HTML
+# ticket-assigner html

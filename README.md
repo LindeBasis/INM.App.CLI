@@ -6,11 +6,23 @@ Automates daily ticket assignment using INM.csv, TEAM_AVAIL.csv, and TEAM_MASTER
 
 ## Folder Structure
 
-data/
-INM.csv
-TEAM_AVAIL.csv
-TEAM_MASTER.csv`
-TEAM_Assigned.csv
+ticket_assigner/
+│
+├── ticket_assigner/
+│   └── cli.py
+│
+├── data/
+│   ├── INM.csv
+│   ├── INM.normalized.csv  <-- auto-created
+│   ├── TEAM_AVAIL.csv
+│   ├── TEAM_MASTER.csv
+│   ├── TEAM_Assigned.csv   <-- auto-created
+│   ├── TEAM_Assigned.html  <-- auto-created
+│   └── ticket_assign.db    <-- created by load-inm
+│
+├── setup.py
+└── README.md (optional)
+
 
 ## Usage
 

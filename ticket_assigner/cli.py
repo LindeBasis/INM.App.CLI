@@ -78,17 +78,44 @@ def assign_tickets(inm_file, avail_file, team_file, output_file):
     print(f"✅ Tickets assigned and saved to {output_file}")
 
     # Create TEAM_Assigned_Email.csv
-    # ✅ Step 1: Remove rows with NaN in 'expert_assignee_name'
-    cleaned_df = assigned_df.dropna(subset=['expert_assignee_name'])
+    # ✅ Step 1: Keep only rows where expert_assignee_name is NaN
+    unassigned_df = assigned_df[assigned_df['expert_assignee_name'].isna()]
 
-    # ✅ Step 2: Drop unnecessary columns for the email report
+    # ✅ Step 2: Drop columns not needed for email
     columns_to_drop = ['service_display_label', 'expert_assignee_name', 'creation_time']
-    cleaned_df = cleaned_df.drop(columns=[col for col in columns_to_drop if col in cleaned_df.columns])
+    unassigned_df = unassigned_df.drop(columns=[col for col in columns_to_drop if col in unassigned_df.columns])
 
-    # ✅ Step 3: Save the final cleaned CSV
+    # ✅ Step 3: Save to TEAM_Assigned_Email.csv
     email_path = os.path.join(DATA_DIR, "TEAM_Assigned_Email.csv")
-    cleaned_df.to_csv(email_path, index=False)
-    print(f"📧 Final email-ready CSV saved to TEAM_Assigned_Email.csv")
+    unassigned_df.to_csv(email_path, index=False)
+    print(f"📧 Email-ready CSV (only unassigned tickets) saved to TEAM_Assigned_Email.csv")
+
+    # ✅ Step 4: Generate HTML file from TEAM_Assigned_Email.csv
+    html_path = os.path.join(DATA_DIR, "TEAM_Assigned_Email.html")
+
+    html_content = unassigned_df.to_html(index=False, border=0)
+
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+    print(f"📝 HTML email content saved to {html_path}")
+
+    # ✅ Step 5: Create mailto: link
+    from urllib.parse import quote
+    from datetime import datetime
+    import webbrowser
+
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    subject = f"Daily Incident Assignment {today_str}"
+    to_email = "si_basis@linde.com"
+
+    # NOTE: This may fail silently if HTML content is too long
+    mailto_body = quote(html_content)
+
+    mailto_link = f"mailto:{to_email}?subject={quote(subject)}&body={mailto_body}"
+
+    print("📨 Opening email draft...")
+    webbrowser.open(mailto_link)
 
 
 def generate_html_from_csv(csv_file='TEAM_Assigned_Email.csv', output_file='TEAM_Assigned.html'):
