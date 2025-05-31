@@ -18,17 +18,18 @@ TEAM_Assigned.csv
 # Install the CLI
 pip install .
 
-# Step 1: Normalize INM.csv
-ticket-assigner.exe normalize-inm --input INM.csv
+# Normalize column names
+ticket-assigner normalize-inm
 
-# Step 2: Load normalized version
-ticket-assigner.exe load-inm --inm INM.normalized.csv
+# Load data to DB
+ticket-assigner load-inm --inm INM.normalized.csv
 
-# Step 3: Assign tickets using normalized file
-ticket-assigner.exe assign --inm INM.normalized.csv --avail TEAM_AVAIL.csv --team TEAM_MASTER.csv
+# Assign tickets and generate TEAM_Assigned.csv and TEAM_Assigned_Email.csv
+ticket-assigner assign
 
-# Step 4: Generate HTML
-ticket-assigner.exe html --input TEAM_Assigned.csv
+# Convert TEAM_Assigned_Email.csv to HTML
+ticket-assigner html
+
 ```
 
 

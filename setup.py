@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ticket_assigner',
-    version='1.0.1',
+    version='1.1.2',
     packages=find_packages(),
     install_requires=['pandas'],
     entry_points={

@@ -48,10 +48,10 @@ def assign_tickets(inm_file, avail_file, team_file, output_file):
     inm_df.columns = inm_df.columns.str.strip().str.lower().str.replace(r'\s+', '_', regex=True)
 
     avail_df = pd.read_csv(os.path.join(DATA_DIR, avail_file))
-    avail_df.columns = avail_df.columns.str.strip().str.lower()
+    avail_df.columns = avail_df.columns.str.strip().str.lower().str.replace(r'\s+', '_', regex=True)
 
     team_df = pd.read_csv(os.path.join(DATA_DIR, team_file))
-    team_df.columns = team_df.columns.str.strip().str.lower()
+    team_df.columns = team_df.columns.str.strip().str.lower().str.replace(r'\s+', '_', regex=True)
 
     if 'status' not in avail_df.columns or 'name' not in avail_df.columns:
         raise ValueError("TEAM_AVAIL.csv must contain 'Name' and 'Status' columns")
@@ -71,11 +71,24 @@ def assign_tickets(inm_file, avail_file, team_file, output_file):
         })
 
     assigned_df = pd.DataFrame(assigned)
-    assigned_df.to_csv(os.path.join(DATA_DIR, output_file), index=False)
+
+    # Save TEAM_Assigned.csv
+    assigned_path = os.path.join(DATA_DIR, output_file)
+    assigned_df.to_csv(assigned_path, index=False)
     print(f"✅ Tickets assigned and saved to {output_file}")
 
+    # Create TEAM_Assigned_Email.csv
+    email_df = assigned_df.dropna(subset=['expert_assignee_name'])
 
-def generate_html_from_csv(csv_file, output_file='TEAM_Assigned.html'):
+    columns_to_drop = ['priority', 'service_display_label', 'expert_assignee_name', 'creation_time']
+    email_df = email_df.drop(columns=[col for col in columns_to_drop if col in email_df.columns])
+
+    email_path = os.path.join(DATA_DIR, "TEAM_Assigned_Email.csv")
+    email_df.to_csv(email_path, index=False)
+    print(f"📧 Email-ready CSV saved to TEAM_Assigned_Email.csv")
+
+
+def generate_html_from_csv(csv_file='TEAM_Assigned_Email.csv', output_file='TEAM_Assigned.html'):
     df = pd.read_csv(os.path.join(DATA_DIR, csv_file))
     html = df.to_html(index=False, border=1)
 
@@ -106,7 +119,7 @@ def cli():
 
     # html
     html_parser = subparsers.add_parser("html")
-    html_parser.add_argument('--input', default='TEAM_Assigned.csv')
+    html_parser.add_argument('--input', default='TEAM_Assigned_Email.csv')
     html_parser.add_argument('--output', default='TEAM_Assigned.html')
 
     args = parser.parse_args()
