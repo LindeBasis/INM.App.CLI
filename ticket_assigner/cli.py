@@ -100,22 +100,22 @@ def assign_tickets(inm_file, avail_file, team_file, output_file):
 
     print(f"📝 HTML email content saved to {html_path}")
 
-    # ✅ Step 5: Create mailto: link
-    from urllib.parse import quote
-    from datetime import datetime
-    import webbrowser
+    # # ✅ Step 5: Create mailto: link
+    # from urllib.parse import quote
+    # from datetime import datetime
+    # import webbrowser
 
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    subject = f"Daily Incident Assignment {today_str}"
-    to_email = "si_basis@linde.com"
+    # today_str = datetime.now().strftime("%Y-%m-%d")
+    # subject = f"Daily Incident Assignment {today_str}"
+    # to_email = "si_basis@linde.com"
 
-    # NOTE: This may fail silently if HTML content is too long
-    mailto_body = quote(html_content)
+    # # NOTE: This may fail silently if HTML content is too long
+    # mailto_body = quote(html_content)
 
-    mailto_link = f"mailto:{to_email}?subject={quote(subject)}&body={mailto_body}"
+    # mailto_link = f"mailto:{to_email}?subject={quote(subject)}&body={mailto_body}"
 
-    print("📨 Opening email draft...")
-    webbrowser.open(mailto_link)
+    # print("📨 Opening email draft...")
+    # webbrowser.open(mailto_link)
 
 
 def generate_html_from_csv(csv_file='TEAM_Assigned_Email.csv', output_file='TEAM_Assigned.html'):

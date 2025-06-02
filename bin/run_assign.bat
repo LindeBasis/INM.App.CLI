@@ -10,4 +10,5 @@ ticket-assigner assign
 
 rem # Convert TEAM_Assigned_Email.csv to HTML
 rem ticket-assigner html
+python send_outlook_email.py
 pause
