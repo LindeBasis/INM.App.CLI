@@ -1,16 +1,26 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='ticket_assigner',
-    version='2.1.0',
+    name="ticket-assigner",
+    version="3.1.0",
+    description="Daily Incident Assignment CLI Tool for SAP Basis Team",
+    author="Your Name",
     packages=find_packages(),
-    install_requires=['pandas'],
+    include_package_data=True,
+    install_requires=[
+        "pandas",
+        "xlrd",
+        "openpyxl",
+        "pywin32",
+    ],
     entry_points={
-        'console_scripts': [
-            'ticket-assigner = ticket_assigner.cli:cli',
-        ],
+        "console_scripts": [
+            "ticket-assigner = ticket_assigner.cli:cli"
+        ]
     },
-    author='Your Name',
-    description='Assigns tickets from INM.csv to available team members and generates HTML output.',
-    classifiers=['Programming Language :: Python :: 3'],
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Operating System :: OS Independent",
+    ],
+    python_requires=">=3.7",
 )

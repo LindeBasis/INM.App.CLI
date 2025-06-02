@@ -1,9 +1,12 @@
 @echo off
+rem # Fetch Latest INM file
+ticket-assigner fetch-latest
+
 rem # Normalize column names
 ticket-assigner normalize-inm
 
 rem # Load data to DB
-ticket-assigner load-inm --inm INM.normalized.csv
+ticket-assigner load-inm 
 
 rem # Assign tickets and generate TEAM_Assigned.csv and TEAM_Assigned_Email.csv
 ticket-assigner assign
