@@ -117,6 +117,15 @@ def assign_tickets(inm_file, avail_file, team_file, output_file):
         f.write(html_content)
     print(f"📝 HTML email content saved to {html_path}")
 
+    # ✅ Save TEAM_Assigned_Email.xlsx to 'assigned' table in DB
+    conn = sqlite3.connect(DB_PATH)
+    unassigned_df['created_at'] = datetime.now().isoformat()
+    unassigned_df.to_sql("assigned", conn, if_exists='append', index=False)
+    conn.commit()
+    conn.close()
+    print("📦 Saved email-ready data to 'assigned' table in ticket_assign.db")
+
+
 def generate_html_from_excel(excel_file='TEAM_Assigned_Email.xlsx', output_file='TEAM_Assigned.html'):
     df = pd.read_excel(os.path.join(DATA_DIR, excel_file), engine='openpyxl')
     html = df.to_html(index=False, border=1)
@@ -124,6 +133,22 @@ def generate_html_from_excel(excel_file='TEAM_Assigned_Email.xlsx', output_file=
     with open(os.path.join(DATA_DIR, output_file), 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"✅ HTML report saved to {output_file}")
+
+def create_csv_from_db_previousAssigned():
+    conn = sqlite3.connect(DB_PATH)
+    query = """
+    SELECT * FROM assigned
+    ORDER BY created_at DESC
+    """
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+
+    if df.empty:
+        print("⚠️ No data found in assigned table.")
+    else:
+        path = os.path.join(DATA_DIR, "previous_assigned.xlsx")
+        df.to_excel(path, index=False)
+        print(f"✅ previous_assigned.xlsx created with latest entries from 'assigned' table.")
 
 
 def cli():
