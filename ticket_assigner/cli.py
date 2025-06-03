@@ -192,6 +192,8 @@ def cli():
         assign_tickets(args.inm, args.avail, args.team, args.output)
     elif args.command == "html":
         generate_html_from_excel(args.input, args.output)
+    elif args.command == "previous-assigned":
+        create_csv_from_db_previousAssigned()
     else:
         parser.print_help()
 

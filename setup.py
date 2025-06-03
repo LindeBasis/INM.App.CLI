@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ticket-assigner",
-    version="3.2.0",
+    version="4.5.0",
     description="Daily Incident Assignment CLI Tool for SAP Basis Team",
     author="Your Name",
     packages=find_packages(),
