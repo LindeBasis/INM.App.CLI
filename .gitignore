@@ -2,6 +2,7 @@ data/*.csv
 data/*.db
 data/*.html
 data\*
+data.SD
 
 *.db
 *.csv
