@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ticket-assigner",
-    version="4.5.0",
+    version="4.6.0",
     description="Daily Incident Assignment CLI Tool for SAP Basis Team",
     author="Your Name",
     packages=find_packages(),
@@ -12,6 +12,7 @@ setup(
         "xlrd",
         "openpyxl",
         "pywin32",
+        "beautifulsoup4"
     ],
     entry_points={
         "console_scripts": [

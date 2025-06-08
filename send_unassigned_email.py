@@ -3,16 +3,18 @@ import os
 from bs4 import BeautifulSoup, Tag
 import sys
 import re # Import regex for cleaning cell text if needed
-
+from datetime import datetime
+import pandas as pd
 
 original_html_file_path = "data\\TEAM_UnAssigned.html"
 html_file_path = "data\\TEAM_UnAssigned_Email_Formatted.html" 
 
 # Recipient email address
-recipient_email = "sumit.das@linde.com"
+recipient_email = "si_basis@linde.com"
 
 # Email subject
-email_subject = "Unassigned Incident Ticket"
+today_str = datetime.now().strftime("%Y-%m-%d")
+email_subject = f"Unassigned Incidents - {today_str}"
 
 
 ## Style CSS Start
@@ -35,7 +37,7 @@ try:
     soup = BeautifulSoup("", 'html.parser') # Create a new empty soup
 
     # Create the header paragraph
-    header_text = "Daily Incident Assignment"
+    header_text = "Hi All, Please find below today's Unassigned Incident List :"
     header_style = "font-family: Tahoma, sans-serif; font-size: 12pt; text-align: left; margin-bottom: 10px;"
     header_p = soup.new_tag("p", style=header_style)
     header_p.string = header_text
@@ -90,10 +92,78 @@ try:
                         # Re-apply style to the cell itself if needed, though inherited style might suffice
                         cell['style'] = td_style
 
+
+    # Summary Table 
+    # Paths
+    unassigned_full_path = os.path.join("data", "INM.normalized.2.xlsx")
+    # assigned_email_path = os.path.join("data", "TEAM_Assigned_Email.xlsx")
+
+    # Load data
+    unassigned_full_df = pd.read_excel(unassigned_full_path)
+    # assigned_email_df = pd.read_excel(assigned_email_path)
+
+    # Normalize column names
+    unassigned_full_df.columns = unassigned_full_df.columns.str.strip().str.lower()
+    # assigned_email_df.columns = assigned_email_df.columns.str.strip().str.lower()
+
+    # Calculate counts
+    open_count = unassigned_full_df['expert_assignee_name'].isna().sum()
+    unassigned_count = unassigned_full_df['expert_assignee_name'].notna().sum()
+    total_count = len(unassigned_full_df)
+
+    # Create HTML summary table
+    summary_html = f"""
+    <table style="border: 2px solid black; border-collapse: collapse; font-family: Tahoma, sans-serif; font-size: 10pt; margin-bottom: 8px;border: 1px solid;">
+    <thead>
+        <tr style="background-color: #dddddd;">
+        <th style="border: 1px solid black; padding: 5px;text-align: center;">Type of Incident</th>
+        <th style="border: 1px solid black; padding: 5px;text-align: center;">Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;">Open Incidents</td>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;">{open_count}</td>
+        </tr>
+        <tr>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;">Unassigned Incidents</td>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;">{unassigned_count}</td>
+        </tr>
+        <tr>
+        <td style="border: 1px solid black; padding: 1px; font-weight: bold;text-align: center;">Total Incidents</td>
+        <td style="border: 1px solid black; padding: 1px; font-weight: bold;text-align: center;">{total_count}</td>
+        </tr>
+    </tbody>
+    </table>
+    """
+
+  # Build the headers
+    header_line1 = soup.new_tag("p", style="font-family: Tahoma, sans-serif; font-size: 12pt; text-align: left; margin-bottom: 0px;")
+    header_line1.string = "Hi All, Please find below today's Unassigned Incidents."
+
+    header_line2 = soup.new_tag("p", style="font-family: Tahoma, sans-serif; font-size: 9pt; text-align: left; background-color: #ffffcc; padding: 5px; margin-top: 4px;")
+    b_tag = soup.new_tag("b")
+    b_tag.string = "Note:"
+    header_line2.append(b_tag)
+    header_line2.append(" You can click on the ticket number to go directly to the incident in SMAX.")
+
+    # Parse the summary table
+    summary_soup = BeautifulSoup(summary_html, 'html.parser')
+    summary_table = summary_soup.find("table")
+
     # --- Step 3: Create the final HTML structure ---
     container_div = soup.new_tag("div")
-    container_div.append(header_p)
-    container_div.append(table) # Append the modified table
+    # Line break spacer
+    spacer = soup.new_tag("div", style="height: 50px;")
+
+    # Append all to container_div with spacing
+    container_div.append(header_line1)
+    container_div.append(spacer)
+    container_div.append(summary_table)
+    container_div.append(spacer)
+    container_div.append(header_line2)
+    container_div.append(spacer)
+    container_div.append(table)
 
     final_html = str(container_div)
 
@@ -101,6 +171,7 @@ try:
     with open(html_file_path, 'w', encoding='utf-8') as out_f:
         out_f.write(final_html)
     print(f"Custom styles, header, font, and Id hyperlinks added to {html_file_path}")
+
 
 except Exception as e:
     print(f"An error occurred while adding styles/links: {e}")
@@ -134,6 +205,14 @@ def send_email_with_html_table(html_path, to_email, subject):
         # Set email properties
         mail.To = to_email
         mail.Subject = subject
+        mail.CC = (
+                "sandeep.kumar.jha@linde.com; "
+                "Praveen.Verma@linde.com; "
+                "thomas.gerulat@linde.com; "
+                "Steffen.Schnell-Kretschmer@linde.com; "
+                "Santosh.Kumar@linde.com; "
+                "sumit.das@linde.com"
+            )        
         # mailto_link = f"mailto:{to_email}?subject={quote(subject)}&body={mailto_body}"
         # Set the body as HTML
         mail.HTMLBody = html_body_content

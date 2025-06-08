@@ -1,21 +1,30 @@
-MIT License
+# LINDE LICENSE
 
-Copyright (c) 2025 Sumit Das
+/**
+ * Copyright © 2025 Linde plc, all rights reserved
+ * 
+ * This source code is protected under international copyright law.  
+ * All rights reserved and protected by the copyright holders.
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ * Written by {Sumit Das} <sumit.das@linde.com>, [04-Jun-2025]
+*/
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+# **Source Code Asset**  Use and Access Agreement
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## READ CAREFULLY BEFORE ACCESSING OR USING THIS **Source Code Asset** 
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+/**
+This is a private **Source Code Asset**  owned by Linde plc (hereinafter, “Linde”) and may be used only in accordance with the terms and conditions set forth in this **Source Code Asset**  Use & Access Agreement (this "Agreement").  Like all Linde assets, it contains Business Confidential information subject to legal protection, and is subject to unannounced monitoring and inspection as necessary to assure its use for proper business purposes and protect Linde's legal interests.  Except as specifically authorized, it is intended solely for internal use by Linde personnel; any external use or disclosure is strictly prohibited.  If you have not received specific authorization to access this system terminate this connection immediately.
+
+This **Source Code Asset LICENSE** contains only a general summary of the major principles of the described policies, practices and procedures, and other than this **Source Code Asset**  Use and Access Agreement, is not a contract under which enforceable rights arise.  Linde reserves the right to amend, revise, or terminate them at any time for any reason in its sole discretion without notice.  Linde may limit or deny access to this **Source Code Asset** for any reason.  Creating or responding to data in it is your irrevocable consent to assign the Linde (and or its affiliates) all your rights in all ideas, information and inventions contained.
+
+>BY ACCESSING OR USING THIS **Source Code Asset** , YOU AGREE TO BE BOUND BY ALL THE TERMS OF THIS AGREEMENT AS MODIFIED FROM TIME TO TIME.  IF YOU DO NOT AGREE, DO NOT USE THIS **Source Code Asset** .  Any doubt in connection with these matters should be resolved by contacting the Law Department.
+
+This **Source Code Asset** has been designed by Linde and its content and unique application is protected by applicable laws, copyrights, trademarks and service marks.  No part of this material may be reproduced or transmitted in any form or by means electronic or mechanical (recording of any information storage and retrieval system) without permission in writing from Linde, with the exception of sending a link to the **Source Code Asset** to a person with access to Linde's e-mail system, or printing a page for internal use (except where otherwise noted).  Please protect your unique user identification and password with the utmost care to prevent unauthorized access.
+
+Any links to **other tools, code base, site**, are provided merely as a convenience and, if one decides to access any of these **third party tools, code base, site, links**, they do so entirely at their own risk and are responsible for compliance with all applicable laws. 
+
+One may not post content from this **Source Code Asset**, by any means, to any other **Source Code** without written permission from Linde, except where noted. You may, however, link to this **Source Code Asset** for internal (Linde) purposes.
+*/
+
+[LINDE LEGAL NOTICE](https://lindegroup.sharepoint.com/sites/Airtime/SitePages/Legal-Notice.aspx)
