@@ -95,21 +95,22 @@ try:
 
     # Summary Table 
     # Paths
-    unassigned_full_path = os.path.join("data", "INM.normalized.2.xlsx")
-    # assigned_email_path = os.path.join("data", "TEAM_Assigned_Email.xlsx")
+    assigned_full_path = os.path.join("data", "INM.normalized.2.xlsx")
+    unassigned_email_path = os.path.join("data", "TEAM_UnAssigned_Email.xlsx")
 
     # Load data
-    unassigned_full_df = pd.read_excel(unassigned_full_path)
-    # assigned_email_df = pd.read_excel(assigned_email_path)
+    assigned_full_df = pd.read_excel(assigned_full_path)
+    unassigned_email_df = pd.read_excel(unassigned_email_path)
 
     # Normalize column names
-    unassigned_full_df.columns = unassigned_full_df.columns.str.strip().str.lower()
-    # assigned_email_df.columns = assigned_email_df.columns.str.strip().str.lower()
+    assigned_full_df.columns = assigned_full_df.columns.str.strip().str.lower()
+    unassigned_email_df.columns = unassigned_email_df.columns.str.strip().str.lower()
 
     # Calculate counts
-    open_count = unassigned_full_df['expert_assignee_name'].isna().sum()
-    unassigned_count = unassigned_full_df['expert_assignee_name'].notna().sum()
-    total_count = len(unassigned_full_df)
+    open_count = assigned_full_df['expert_assignee_name'].isna().sum()
+    assigned_count = assigned_full_df['expert_assignee_name'].notna().sum()
+    unassigned_count = len(unassigned_email_df)
+    total_count = len(assigned_full_df)
 
     # Create HTML summary table
     summary_html = f"""
@@ -126,8 +127,12 @@ try:
         <td style="border: 1px solid black; padding: 1px;text-align: center;">{open_count}</td>
         </tr>
         <tr>
-        <td style="border: 1px solid black; padding: 1px;text-align: center;">Unassigned Incidents</td>
-        <td style="border: 1px solid black; padding: 1px;text-align: center;">{unassigned_count}</td>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;">Assigned Incidents</td>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;">{assigned_count}</td>
+        </tr>
+        <tr>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;color: red; ">Unassigned Incidents</td>
+        <td style="border: 1px solid black; padding: 1px;text-align: center;color: red; ">{unassigned_count}</td>
         </tr>
         <tr>
         <td style="border: 1px solid black; padding: 1px; font-weight: bold;text-align: center;">Total Incidents</td>
